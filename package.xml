@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<package>
+<!DOCTYPE package SYSTEM "../package.dtd">
+<package version="1.0">
   <name>Image_Remote</name>
   <summary>Retrieve information on remote image files.</summary>
-  <maintainer>
-    <user>tuupola</user>
-    <name>Mika Tuupola</name>
-    <email>tuupola@appelsiini.net</email>
-    <role>lead</role>
-  </maintainer>
+  <maintainers>
+    <maintainer>
+      <user>tuupola</user>
+      <name>Mika Tuupola</name>
+      <email>tuupola@appelsiini.net</email>
+      <role>lead</role>
+    </maintainer>
+  </maintainers>
 
   <release>
     <version>1.0</version>
