@@ -19,7 +19,7 @@
     <notes>Since PHP 4.05 URL support was added also to PHP's native GetImageSize()</notes>
     <filelist>
       <dir name="/" baseinstalldir="Image">
-        <file role="php">Remote.php</file>
+        <file role="php" name="Remote.php" />
       </dir>
     </filelist>
   </release>
