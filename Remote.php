@@ -77,11 +77,12 @@ require_once('PEAR.php');
   *
   * Usage:
   *   
-  *   $i = new Image_Remote("http://www.example.com/test.png");
+  *   $i = new Image_Remote("http://www.example.com/test.jpg");
   *   if (PEAR::isError($i)) {
   *       print "ERROR: " . $i->getMessage();
   *   } else { 
-  *       $data = $i->getImageSize();
+  *       $size    = $i->getImageSize();
+  *       $comment = $i->getImageComment();
   *   }
   *   
   *
@@ -151,6 +152,12 @@ class Image_Remote
     */
     var $extra;       // some useless extrainfo
 
+  /**
+    * JPEG comment
+    *
+    * @var  string
+    */
+    var $comment; 
 
   /**
     * Error of the last method call
@@ -233,6 +240,22 @@ class Image_Remote
     }
 
   /**
+    * Return the Comment found in the remote image. 
+    *
+    * This comment is being used to specify the JPG image.
+    * http://www.w3.org/Graphics/JPEG/itu-t81.pdf
+    * 
+    * @access    public
+    * @return    string
+    * @author    Urs Gehrig <urs@circle.ch>    
+    */
+    function getImageComment() 
+    {
+        $retval = $this->comment;
+        return($retval);
+    }
+
+  /**
     * Fetch information of the remote image. 
     *
     * @access	private
@@ -253,7 +276,7 @@ class Image_Remote
             // get the headers.
             fputs ($fp, "GET " . $this->purl[path] . $this->purl[query] . " HTTP/1.1\r\n");
             fputs ($fp, "Host: " . $this->purl[host] . "\r\n");
-            fputs ($fp, "User-Agent: Image_Remote PHP Class\r\n");
+            fputs ($fp, "User-Agent: PEAR Image_Remote class ( http://pear.php.net) \r\n");
             fputs ($fp, "Connection: close\r\n\r\n");
             $line = trim(fgets($fp,128));
             while ($line) {
@@ -403,6 +426,10 @@ class Image_Remote
             } else { 
 
                 while (!($done)) {
+
+                    if ($m_sof && $m_com) {
+                        $done = 1;
+                    }
         
                     // find next marker
                     $marker = ord(fread($fd, 1));
@@ -438,8 +465,18 @@ class Image_Remote
                             $this->height = Image_Remote::_ntodecs($hbytes);
                          
                             $this->extra  = "";
-                            $done = 1;
+                            $m_sof = 1;
                             break; 
+                         case M_COM:
+                             // Get length of comment
+                             $bytes = fread($fd, JPG_PARAM_LENGTH_LENGTH);
+                             $length = Image_Remote::_chartodec($bytes);
+                             $length -= JPG_PARAM_LENGTH_LENGTH;
+                       
+                             // Read comment
+                             $this->comment = fread($fd, $length);
+                             $m_com = 1;
+                             break;
                         case M_SOS:  
                             $done = 1; 
                             break;
@@ -519,6 +556,20 @@ class Image_Remote
         $b2 = (ord($bytes[0]) << 8 );
         return($b1 + $b2);
     }
+
+   /**
+     * Convert char to decimal
+     *
+     * @access private
+     * @return   integer
+     * @author Urs Gehrig <urs@circle.ch>
+     */
+     function _chartodec($bytes) 
+     {        
+         $b1 = (ord($bytes[0]) << 8 );
+         $b2 = ord($bytes[1]);
+         return($b1 + $b2);
+     }
 
 } // class 
 
