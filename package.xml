@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<package>
+  <name>Image_Remote</name>
+  <summary>Retrieve information on remote image files.</summary>
+  <maintainer>
+    <user>tuupola</user>
+    <name>Mika Tuupola</name>
+    <email>tuupola@appelsiini.net</email>
+    <role>lead</role>
+  </maintainer>
+
+  <release>
+    <version>1.0</version>
+    <date>2002-02-14</date>
+    <state>beta</state>
+    <notes>Since PHP 4.05 URL support was added also to PHP's native GetImageSize()</notes>
+    <filelist>
+      <dir name="/" baseinstalldir="Image">
+        <file role="php">Remote.php</file>
+      </dir>
+    </filelist>
+  </release>
+</package>
