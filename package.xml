@@ -3,6 +3,10 @@
 <package version="1.0">
   <name>Image_Remote</name>
   <summary>Retrieve information on remote image files.</summary>
+  <description>
+    This class can be used for retrieving size information of remote image 
+    files via http without downloading the whole image. 
+  </description>
   <maintainers>
     <maintainer>
       <user>tuupola</user>
@@ -11,6 +15,8 @@
       <role>lead</role>
     </maintainer>
   </maintainers>
+
+  <license>PHP</license>
 
   <release>
     <version>1.0</version>
