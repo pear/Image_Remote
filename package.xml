@@ -19,10 +19,10 @@
   <license>PHP</license>
 
   <release>
-    <version>1.0</version>
-    <date>2002-02-14</date>
-    <state>beta</state>
-    <notes>Since PHP 4.05 URL support was added also to PHP's native GetImageSize()</notes>
+    <version>1.0.1</version>
+    <date>2005-10-14</date>
+    <state>stable</state>
+    <notes>Release a minor version to fix bug #5545: package not installable</notes>
     <filelist>
       <dir name="/" baseinstalldir="Image">
         <file role="php" name="Remote.php" />
