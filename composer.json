@@ -1,0 +1,28 @@
+{
+    "authors": [
+        {
+            "email": "tuupola@appelsiini.net",
+            "name": "Mika Tuupola",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "./"
+        ]
+    },
+    "description": "More info available on: http://pear.php.net/package/Image_Remote",
+    "license": "PHP",
+    "name": "pear/image_remote",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Image_Remote",
+        "source": "https://github.com/pear/Image_Remote"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
